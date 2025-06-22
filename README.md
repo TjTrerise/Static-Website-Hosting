@@ -73,7 +73,7 @@ The creation of a static website that will provide quick access to the projects 
  [Detailed deployment guide with screenshots](docs/detailed-deployment-guide.md)
 
 Deployed URL
-* [tjt.org.uk]
+* [https://tjt.org.uk]
 
 ## Visuals Of Finished Project
     
@@ -96,5 +96,5 @@ As this is my first ever project it's simple but effective. From a visual perspe
 
 * [https://www.linkedin.com/in/tyrelle-trerise-9766b9108/]
 * [https://tjtrerise.github.io/TTrerise.Portfolio.io/]
-* [tjt.org.uk]
+* [https://tjt.org.uk]
 
