@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-# Project Title: [Your Project Name Here, e.g., "My Personal Portfolio Website"]
+# Static Website Hosted On AWS Utilising S3, CloudFront, ACM, Route 53
 
 ## Project Overview
 
@@ -16,7 +15,7 @@ The creation of a static website that will provide quick access to the projects 
 ## Architecture
 
 * A high-level description of the solution architecture.
-* [Architecture Diagram](docs/static-web-architecture.png)`).
+* [Architecture Diagram](docs/architecture/static-web-architecture.png).
 * Briefly explain the role of each major AWS service (S3, CloudFront, ACM, Route 53 if used).
 
 ## Technologies Used
