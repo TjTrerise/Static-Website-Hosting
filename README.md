@@ -79,8 +79,8 @@ Deployed URL
     
 * Finished website: [Website Homepage](docs/screenshots/screenshots/finished-project-photos/finished-website.png)
 * CloudFront distribution: [CloudFront Distribution](docs/screenshots/finished-project-photos/cloudfront-distribution.png)
-* Generated certificates: [ACM certificates]((docs/screenshots/finished-project-photos/generated-certificates.png)
-* Finished S3 bucket: [S3 Bucket] ((docs/screenshots/finished-project-photos/s3-bucket.png)
+* Generated certificates: [ACM certificates](docs/screenshots/finished-project-photos/generated-certificates.png)
+* Finished S3 bucket: [S3 Bucket](docs/screenshots/finished-project-photos/s3-bucket.png)
 
 ## Lessons Learned & Challenges Overcome
 
