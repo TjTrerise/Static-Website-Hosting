@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Project Title: [Your Project Name Here, e.g., "My Personal Portfolio Website"]
 
 ## Project Overview
@@ -105,3 +106,6 @@ The creation of a static website that will provide quick access to the projects 
 * [Your Personal Website/Portfolio Link (if applicable)]
 
 ---
+=======
+Creating my static portfolio blog on S3, served via CloudFront with HTTPS. Registering a domain and configuring DNS with Route 53. 
+>>>>>>> 666c8c8bc4361fa1c1de86293ad25c22d0ac8d7e
