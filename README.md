@@ -14,20 +14,20 @@ The creation of a static website that will provide quick access to the projects 
 
 ## Architecture
 
-* [Architecture Diagram](docs/architecture/static-web-architecture.png).
+* [Architecture Diagram](docs/architecture/static-web-architecture.png)
 * S3
- - Storing files on S3 is very cost effective as the charges are very reasonable.
- - Secure file storage due to no one being able to access S3 outside of the AWS console without specific policies allowing it.
- - High availability. S3 is automatically replicated across multiple AZs also making highly redundant.
+    - Storing files on S3 is very cost effective as the charges are very reasonable.
+    - Secure file storage due to no one being able to access S3 outside of the AWS console without specific policies allowing it.
+    - High availability. S3 is automatically replicated across multiple AZs also making highly redundant.
 * Route 53
- - Allows you to register domains to use for your static website.
- - Using various DNS records (such as alias records) you can link your hosted zone to various AWS resources such as CloudFront.
+    - Allows you to register domains to use for your static website.
+    - Using various DNS records (such as alias records) you can link your hosted zone to various AWS resources such as CloudFront.
 * AWS Certificate Manager
- - Allows you to create free SSL/TLS certificates to increase the security of your website. 
+    - Allows you to create free SSL/TLS certificates to increase the security of your website. 
 * CloudFront
- - Content delivery network that reduces latency by storing cached data in edge locations.
- - Using behaviours you can ensure that the correct network protcols are being used i.e. HTTPS instead of HTTP.
- - Provides an extra layer of security to your data as CloudFront accesses your S3 bucket instead of any external connection.
+    - Content delivery network that reduces latency by storing cached data in edge locations.
+    - Using behaviours you can ensure that the correct network protcols are being used i.e. HTTPS instead of HTTP.
+    - Provides an extra layer of security to your data as CloudFront accesses your S3 bucket instead of any external connection.
  
 ## Technologies Used
 
@@ -38,16 +38,12 @@ The creation of a static website that will provide quick access to the projects 
 ## Prerequisites
 
 * Mandatory prerequisites.
- - AWS account.
- - IAM user with programmatic access and permissions to manage S3, ClouFront, ACM, Route 53 and IAM resources.
- - Money to purchase a domain or access to a registered domain.
+    - AWS account.
+    - IAM user with programmatic access and permissions to manage S3, ClouFront, ACM, Route 53 and IAM resources.
+    - Money to purchase a domain or access to a registered domain.
 
 
 ## Deployment Steps
-
-* Provide a clear, basic, step-by-step guide to deploy the project. Keep it concise.
-* Use numbered lists and code blocks for commands.
-* **Important:** If you have highly detailed steps with many screenshots, link to a more comprehensive guide in your `docs/` directory.
 
 1. S3
     - Create your S3 bucket. Ensure the bucket has a globally unique name and is in the region for your project (Best practice would be to match your bucket to your domain name).
@@ -74,7 +70,7 @@ The creation of a static website that will provide quick access to the projects 
     - The domain you reserved should now be accessible.
 
 * For Detailed Instructions and Visual Proof:
- [View the detailed deployment guide with screenshots here](docs/detailed-deployment-guide.md)
+ [Detailed deployment guide with screenshots](docs/detailed-deployment-guide.md)
 
 Deployed URL
 * [tjt.org.uk]
