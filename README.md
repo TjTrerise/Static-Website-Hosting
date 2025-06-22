@@ -14,26 +14,34 @@ The creation of a static website that will provide quick access to the projects 
 
 ## Architecture
 
-* A high-level description of the solution architecture.
 * [Architecture Diagram](docs/architecture/static-web-architecture.png).
-* Briefly explain the role of each major AWS service (S3, CloudFront, ACM, Route 53 if used).
-
+* S3
+ - Storing files on S3 is very cost effective as the charges are very reasonable.
+ - Secure file storage due to no one being able to access S3 outside of the AWS console without specific policies allowing it.
+ - High availability. S3 is automatically replicated across multiple AZs also making highly redundant.
+* Route 53
+ - Allows you to register domains to use for your static website.
+ - Using various DNS records (such as alias records) you can link your hosted zone to various AWS resources such as CloudFront.
+* AWS Certificate Manager
+ - Allows you to create free SSL/TLS certificates to increase the security of your website. 
+* CloudFront
+ - Content delivery network that reduces latency by storing cached data in edge locations.
+ - Using behaviours you can ensure that the correct network protcols are being used i.e. HTTPS instead of HTTP.
+ - Provides an extra layer of security to your data as CloudFront accesses your S3 bucket instead of any external connection.
+ 
 ## Technologies Used
 
-* List all key technologies and tools used:
-    * **Cloud Platform:** AWS
-    * **AWS Services:** S3, CloudFront, AWS Certificate Manager (ACM), Route 53 (if applicable), IAM
-    * **Infrastructure as Code (IaC):** [Terraform / AWS CloudFormation]
-    * **Version Control:** Git
-    * **Languages/Tools:** HTML, CSS, JavaScript (for the website content itself)
+* Cloud Platform: AWS.
+* AWS Services: S3, CloudFront, AWS Certificate Manager (ACM), Route 53.
+* Languages/Tools: HTML, CSS.
 
 ## Prerequisites
 
-* List what a user needs to have installed or configured *before* they can deploy your project.
-    * AWS Account with appropriate permissions
-    * AWS CLI configured
-    * [Terraform / AWS CLI / cfn-cli] installed (depending on your IaC choice)
-    * A registered domain name (if using custom domain)
+* Mandatory prerequisites.
+ - AWS account.
+ - IAM user with programmatic access and permissions to manage S3, ClouFront, ACM, Route 53 and IAM resources.
+ - Money to purchase a domain or access to a registered domain.
+
 
 ## Deployment Steps
 
@@ -41,70 +49,56 @@ The creation of a static website that will provide quick access to the projects 
 * Use numbered lists and code blocks for commands.
 * **Important:** If you have highly detailed steps with many screenshots, link to a more comprehensive guide in your `docs/` directory.
 
-    1.  **Clone the Repository:**
-        ```bash
-        git clone [https://github.com/yourusername/your-static-website-project.git](https://github.com/yourusername/your-static-website-project.git)
-        cd your-static-website-project
-        ```
-        * *(Optional: Include a single key screenshot here of cloning the repo or the project directory structure after cloning)*
+1. S3
+    - Create your S3 bucket. Ensure the bucket has a globally unique name and is in the region for your project (Best practice would be to match your bucket to your domain name).
+    - Upload the index.html file for the website. 
+2. ACM
+    - Switch your region to us-east-1 and request a certificate (ensure you select public certificate).
+    - Add the required domain names.
+    - Select DNS validation for the validation method.
 
-    2.  **Configure AWS Credentials:**
-        * Brief instruction on ensuring AWS CLI is configured.
+3. Create a CloudFront Distribution.
+    - Select Amazon S3 and select your s3 bucket as the origin.
+    - Use the CloudFront recommended origin settings.
+    - For this scale of project WAF is not needed. 
+    - Edit the settings of the distribution, ensure the custom SSL is asigned, the default root object is 'index.html' and the default behaviour is set to redirect http to https.
 
-    3.  **Deploy Infrastructure (using [Terraform / CloudFormation]):**
-        * Provide the commands to initialize, plan, and apply your IaC.
-        ```bash
-        # Example for Terraform
-        cd infra
-        terraform init
-        terraform plan
-        terraform apply --auto-approve
-        ```
-        * *(Optional: Include a single key screenshot here of a successful IaC deployment output)*
+4. Update S3 Bucket Policy.
+    - Copy the origin Access control bucket policy that is generated from CloudFront and paste it into your S3 bucket policy.
 
-    4.  **Upload Website Content to S3:**
-        * Brief instructions on how to sync your website content to the S3 bucket created by IaC.
-        ```bash
-        aws s3 sync src/ s3://your-s3-bucket-name --delete
-        ```
+5. Map your domain.
+    - Go to your Route 53 hosted zone.
+    - Create DNS records that point to CloudFront. 
 
-    5.  **Access the Website:**
-        * Provide the CloudFront distribution URL or your custom domain.
-        * *(Optional: Include a screenshot of the live website)*
+6. Visit your new static website.
+    - The domain you reserved should now be accessible.
 
-* **For Detailed Instructions and Visual Proof:**
-    * `[View the detailed deployment guide with screenshots here](docs/detailed-deployment-guide.md)`
+* For Detailed Instructions and Visual Proof:
+ [View the detailed deployment guide with screenshots here](docs/detailed-deployment-guide.md)
 
-## Live Demo / Deployed URL (if applicable)
+Deployed URL
+* [tjt.org.uk]
 
-* `[Link to your live static website here]`
-
-## Screenshots / Visuals (if embedded)
-
-* You can embed key screenshots directly here if they highlight major features or the final product.
-    * Example: `![Website Homepage](docs/screenshots/homepage.png)`
-    * Example: `![CloudFront Distribution](docs/screenshots/cloudfront-distribution.png)`
+## Visuals Of Finished Project
+    
+* Finished website: [Website Homepage](docs/screenshots/screenshots/finished-project-photos/finished-website.png)
+* CloudFront distribution: [CloudFront Distribution](docs/screenshots/finished-project-photos/cloudfront-distribution.png)
+* Generated certificates: [ACM certificates]((docs/screenshots/finished-project-photos/generated-certificates.png)
+* Finished S3 bucket: [S3 Bucket] ((docs/screenshots/finished-project-photos/s3-bucket.png)
 
 ## Lessons Learned & Challenges Overcome
 
-* Reflect on your experience. This is crucial for a portfolio!
-* What did you learn during this project? (e.g., nuances of S3 bucket policies, CloudFront caching behaviors, ACM certificate validation).
-* What challenges did you face, and how did you overcome them? (e.g., DNS propagation issues, HTTPS redirection, cache invalidation).
+I really enjoyed this project. As a start to my professional cloud journey getting experience purchasing a domain and creating a static website is a great start. It allowed me utilise some of AWS core features for content delivery, DNS and file storage. 
 
-## Future Enhancements (Optional)
+I learned some key facts about AWS that were unexpected. For example, in order to generate ACM certificates they must be created in us-east-1 and then assigned to the CloudFront distribution required. I also learned that to ensure no overlapp it is essential that your S3 bucket must not allow any public access and be locked down apart from the policy that allows CloudFront access. I ran into an issue whilst creating the website where CloudFront was not enforcing HTTPS. This is where I learned how to modify distribution behvaviours and how granular the CloudFront controls are. I was unaware that the assigning a default root object was essential for a static web page. Utilising all these changes led me to the invalidation tab which clears your caches and ensures that the most recent files from your origin locations are distributed. 
 
-* Ideas for future improvements or additional features you might add.
-    * Example: Add a contact form using Lambda and API Gateway.
-    * Example: Implement CI/CD pipeline for automated deployments.
+## Future Enhancements
 
-## Author
+As this is my first ever project it's simple but effective. From a visual perspective I could utilise images, fonts and colours to make the page more presentable. The process of creating the website can be sped up through automation. I could use AWS CodePipeline, CodeBuild and S3 sync to ensure every commit to my github repository automatically updates the website content.I could also configure monitoring and logging by sending the access logs to a S3 bucket. Security could also be improved by utilising AWS WAF to protect the website web exploits. 
 
-* Your Name
-* [Your LinkedIn Profile Link]
-* [Your GitHub Profile Link]
-* [Your Personal Website/Portfolio Link (if applicable)]
+## Tyrelle Trerise
 
----
-=======
-Creating my static portfolio blog on S3, served via CloudFront with HTTPS. Registering a domain and configuring DNS with Route 53. 
->>>>>>> 666c8c8bc4361fa1c1de86293ad25c22d0ac8d7e
+* [https://www.linkedin.com/in/tyrelle-trerise-9766b9108/]
+* [https://tjtrerise.github.io/TTrerise.Portfolio.io/]
+* [tjt.org.uk]
+
