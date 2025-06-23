@@ -91,7 +91,7 @@
   - Select your hosted zone.
   - Create an A record for the first domain.
     * Select create record.
-    * Name the record the same as your domain i.e. "exampledomain.org" [exampledomain.org A-Record](screenshots/visual-guides/6.a-record01.png).
+    * Name the record the same as your domain i.e. "exampledomain.org" [exampledomain.org A-Record](screenshots/visual-guides/6.a-record-01.png)
     * Select the 'Alias' button.
     * In endpoint chose 'Alias' to CloudFront distribution'.
     * In distribtuion chose your distribution.
