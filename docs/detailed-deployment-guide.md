@@ -1,7 +1,7 @@
 ## Phase 1: Register A Domain
 1. Register a domain
   - Go to the Route 53 console ![Route 53](screenshots/visual-guides/1.route53-homepage.png "Route 53 Homepage")
-  - Regiser a domain.
+  - Register a domain.
   - Search to check availability for your domain ![Domain Search](screenshots/visual-guides/1.register-domain.png "Registering A Domain")
   - Proceed to the checkout.
   - Confirm your contact information.
